@@ -24,13 +24,13 @@ export default class App extends React.Component {
   };
   
 
-  componentWillMount() {
+  componentDidMount() {
     AsyncStorage.getItem(storageKey).then(storedTaskList => {
-      
+    
       if(storedTaskList) {
-        this.setState( {taskList: JSON.parse(storedTaskList) }, () => {
+        this.setState({ taskList: JSON.parse(storedTaskList) }, () => {
           this.setState({
-            idGenerator: this.state.taskList[this.state.taskList.length - 1].id + 1
+            idGenerator: () => this.state.taskList[this.state.taskList.length - 1].id + 1
           });
         });
       }
